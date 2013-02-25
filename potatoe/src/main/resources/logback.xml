@@ -1,0 +1,25 @@
+<!--This empty configuration is here to prevent logback's default behaviour 
+	of logging everything to the console. -->
+<configuration>
+	<appender name="POTATOE" class="ch.qos.logback.core.FileAppender">
+		<file>ibid.log</file>
+		<append>true</append>
+		<encoder>
+			<pattern>%d %-5p %t [%c{0}] %m%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d %-5p %t [%c{0}] %m%n </pattern>
+		</encoder>
+	</appender>
+
+	<logger name="org.couch.potatoe" additivity="false" level="INFO">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<root level="ERROR">
+		<appender-ref ref="STDOUT" />
+	</root>
+</configuration>
