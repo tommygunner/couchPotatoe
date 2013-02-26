@@ -1,0 +1,21 @@
+Feb 26, 2013 5:04:05 PM com.couchbase.client.CouchbaseProperties setPropertyFile
+INFO: Could not load properties file "cbclient.properties" because: File not found with system classloader.
+2013-02-26 17:04:05.913 INFO com.couchbase.client.CouchbaseConnection:  Added {QA sa=/192.168.1.9:11210, #Rops=0, #Wops=0, #iq=0, topRop=null, topWop=null, toWrite=0, interested=0} to connect queue
+2013-02-26 17:04:05.918 INFO com.couchbase.client.CouchbaseConnection:  Connection state changed for sun.nio.ch.SelectionKeyImpl@a81b1fb
+2013-02-26 17:04:05.959 INFO net.spy.memcached.auth.AuthThread:  Authenticated to ubuntu/192.168.1.9:11210
+2013-02-26 17:04:05.960 INFO com.couchbase.client.ViewConnection:  Added ubuntu to connect queue
+2013-02-26 17:04:05.961 INFO com.couchbase.client.CouchbaseClient:  viewmode property isn't defined. Setting viewmode to production mode
+2013-02-26 17:04:06,131 INFO  main [App] Add Succeeded
+2013-02-26 17:04:06,136 INFO  main [App] get: beer_Czar: {"name":"Czar","abv":8.5,"ibu":0.0,"srm":0.0,"upc":0,"type":"beer","brewery_id":"Wigram","updated":"2013-02-26 05:04:06","description":"Brewed in the authentic historical style of an Imperial Russian Stout, this big bold beer is crafted from rich roasted and toasted malts, fermented with a classic English ale yeast this Czarist favourite is an intense, living, bottle condition, full bodied Stout. At 8.5% abv The Czar lives up to it\u0027s name.","style":"Imperial Stout","category":"Imperial Russian Stout"}
+2013-02-26 17:04:06,137 INFO  main [App] Set Succeeded
+2013-02-26 17:04:06,138 INFO  main [App] get: beer_Czar: {"name":"Czar","abv":8.5,"ibu":0.0,"srm":0.0,"upc":0,"type":"beer","brewery_id":"Wigram","updated":"2013-02-26 05:04:06","description":"Brewed in the authentic historical style of an Imperial Russian Stout, this big bold beer is crafted from rich roasted and toasted malts, fermented with a classic English ale yeast this Czarist favourite is an intense, living, bottle condition, full bodied Stout. At 8.5% abv The Czar lives up to it\u0027s name.","style":"Imperial Stout","category":"Imperial Russian Stout"}
+2013-02-26 17:04:06.142 INFO com.couchbase.client.http.AsyncConnectionManager:  Opening new Couchbase HTTP connection
+2013-02-26 17:04:06.146 INFO com.couchbase.client.http.AsyncConnectionManager$ConnRequestCallback:  ubuntu/192.168.1.9:8092 - Session request successful
+2013-02-26 17:04:06.175 INFO com.couchbase.client.CouchbaseClient:  lookin for:/beer-sample/_design/beer/_view/by_name?key=%22Czar%22
+2013-02-26 17:04:06,215 INFO  main [App] The Key is: Czar
+2013-02-26 17:04:06,215 INFO  main [App] The Value is: beer_Czar
+2013-02-26 17:04:06,215 INFO  main [App] The full document is: {"name":"Czar","abv":8.5,"ibu":0.0,"srm":0.0,"upc":0,"type":"beer","brewery_id":"Wigram","updated":"2013-02-26 05:04:06","description":"Brewed in the authentic historical style of an Imperial Russian Stout, this big bold beer is crafted from rich roasted and toasted malts, fermented with a classic English ale yeast this Czarist favourite is an intense, living, bottle condition, full bodied Stout. At 8.5% abv The Czar lives up to it\u0027s name.","style":"Imperial Stout","category":"Imperial Russian Stout"}
+2013-02-26 17:04:06,219 INFO  main [App] Found Czar! Cheers!
+2013-02-26 17:04:06.221 INFO com.couchbase.client.CouchbaseConnection:  Shut down Couchbase client
+2013-02-26 17:04:06.224 INFO com.couchbase.client.ViewConnection:  Node ubuntu has no ops in the queue
+2013-02-26 17:04:06.225 INFO com.couchbase.client.ViewNode:  I/O reactor terminated for ubuntu
