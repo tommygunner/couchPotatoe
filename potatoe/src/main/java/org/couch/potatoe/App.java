@@ -66,7 +66,8 @@ public class App {
 
 
     /**
-     * assumes view with following JS map <code>
+     * assumes following view code as map 
+     * <code>
      * function (doc, meta) {
      *   if (doc.type && doc.name && doc.type == "beer") {
      *      emit(doc.name, meta.id);
@@ -99,6 +100,7 @@ public class App {
     }
     
     /**
+     * assumes following view code as map
      * <code>
      * function (doc, meta) {
      *   if (doc.type == "beer" && doc.brewery_id) {
@@ -106,6 +108,7 @@ public class App {
      *   }
      * }
      * </code>
+     * and <em>_stats</em> as reducer
      */
     private static void view_By_Abv(CouchbaseClient client) {
         
