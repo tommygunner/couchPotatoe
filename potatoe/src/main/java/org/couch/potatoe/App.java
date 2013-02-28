@@ -1,17 +1,12 @@
 package org.couch.potatoe;
 
-import com.google.gson.GsonBuilder;
-
-import com.couchbase.client.protocol.views.ViewRow;
-
-import com.couchbase.client.protocol.views.ViewResponse;
-
-import com.couchbase.client.protocol.views.Query;
-
-import com.couchbase.client.protocol.views.View;
-
 import com.couchbase.client.CouchbaseClient;
+import com.couchbase.client.protocol.views.Query;
+import com.couchbase.client.protocol.views.View;
+import com.couchbase.client.protocol.views.ViewResponse;
+import com.couchbase.client.protocol.views.ViewRow;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.spy.memcached.internal.OperationFuture;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +28,7 @@ public class App {
     public static final String KEY = "beer_Czar";
 
     // expiration time (in seconds) of the document (use 0 to persist forever)
-    public static final int EXP_TIME = 0;
+    public static final int EXP_TIME = 10;
 
 
     public static void main(String args[]) {
@@ -56,13 +51,13 @@ public class App {
         beer.type = "beer";
         beer.brewery_id = "Wigram";
         beer.updated = new Date();
-        beer.description = "Brewed in the authentic historical style of an Imperial Russian Stout.";
-//        beer.description = "Brewed in the authentic historical style of an Imperial Russian Stout, this big bold beer is crafted from rich roasted and toasted malts, fermented with a classic English ale yeast this Czarist favourite is an intense, living, bottle condition, full bodied Stout. At 8.5% abv The Czar lives up to it's name.";
+        beer.description = "Brewed in the authentic historical style of an Imperial Russian Stout, this big bold beer is crafted from rich roasted and toasted malts, fermented with a classic English ale yeast this Czarist favourite is an intense, living, bottle condition, full bodied Stout. At 8.5% abv The Czar lives up to it's name.";
         beer.style = "Imperial Stout";
         beer.category = "Imperial Russian Stout";
 
         set(client, beer);
-        view(client);
+        view_By_Name(client);
+        view_By_Abv(client);
 
         // Shutdown and wait a maximum of three seconds to finish up operations
         client.shutdown(3, TimeUnit.SECONDS);
@@ -79,7 +74,7 @@ public class App {
      *  }
      *  </code>
      */
-    private static void view(CouchbaseClient client) {
+    private static void view_By_Name(CouchbaseClient client) {
 
         View view = client.getView("beer", "by_name");
 
@@ -100,6 +95,35 @@ public class App {
 
             Beer beer = gson.fromJson((String) row.getDocument(), Beer.class);
             log.info("Found " + beer.name + "! Cheers!");
+        }
+    }
+    
+    /**
+     * <code>
+     * function (doc, meta) {
+     *   if (doc.type == "beer" && doc.brewery_id) {
+     *     emit(doc.brewery_id, doc.abv);
+     *   }
+     * }
+     * </code>
+     */
+    private static void view_By_Abv(CouchbaseClient client) {
+        
+        View view = client.getView("alc", "by_abv");
+        
+        Query query = new Query();
+        query.setGroup(true);
+        query.setReduce(true);
+        query.setLimit(10);
+        
+        ViewResponse result = client.query(view, query);
+        
+        Iterator<ViewRow> itr = result.iterator();
+        log.info("Alcohole stats by brewery");
+        while (itr.hasNext()) {
+            ViewRow row = itr.next();
+            log.info("The Key is: " + row.getKey());
+            log.info("The Value is: " + row.getValue());
         }
     }
 
